@@ -75,7 +75,7 @@ The main purpose of **Ad Campaign Manager** is to help users create and improve 
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/Rehina1010/ad_campaign_manager.git
+git clone https://github.com/Rehina1010/ad_campaign_project-Django-.git
 cd ad_campaign_manager
 ```
 
@@ -160,9 +160,6 @@ This project includes TestCase classes for unit testing various parts of the app
 python manage.py test
 ```
 
-## License
-
-This project is licensed under the MIT License.
 
 ## Contact
 
