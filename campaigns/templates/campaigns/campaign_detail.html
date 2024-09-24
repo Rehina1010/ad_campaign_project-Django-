@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>{{ campaign.title }}</h2>
+<div class="mb-3">
+    <p><strong>Description:</strong> {{ campaign.description }}</p>
+    <p><strong>Budget:</strong> ${{ campaign.budget }}</p>
+    <p><strong>Target Audience:</strong> {{ campaign.target_audience }}</p>
+    <p><strong>Start Date:</strong> {{ campaign.start_date }}</p>
+    <p><strong>End Date:</strong> {{ campaign.end_date }}</p>
+    <p><strong>Status:</strong> {{ campaign.get_status_display }}</p>
+</div>
+<div class="d-flex gap-2 mb-3">
+    <a href="{% url 'campaigns:edit_campaign' campaign.pk %}" class="btn btn-warning">Edit</a>
+    <a href="{% url 'campaigns:campaign_list' %}" class="btn btn-secondary">Back to list</a>
+    <form method="post" action="{% url 'campaigns:improve_campaign' campaign.pk %}">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-info">Improve Campaign</button>
+    </form>
+</div>
+{% if improved_campaign %}
+<div class="alert alert-success mt-3">
+    <h4>Improved Campaign Details:</h4>
+    <p><strong>Title:</strong> {{ improved_campaign.title }}</p>
+    <p><strong>Description:</strong> {{ improved_campaign.description }}</p>
+    <p><strong>Budget:</strong> ${{ improved_campaign.budget }}</p>
+    <p><strong>Target Audience:</strong> {{ improved_campaign.target_audience }}</p>
+    <p><strong>Start Date:</strong> {{ improved_campaign.start_date }}</p>
+    <p><strong>End Date:</strong> {{ improved_campaign.end_date }}</p>
+</div>
+{% endif %}
+<form method="post" action="{% url 'campaigns:delete_campaign' campaign.pk %}">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">Delete Campaign</button>
+</form>
+{% endblock %}

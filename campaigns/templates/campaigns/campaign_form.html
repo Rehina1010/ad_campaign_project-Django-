@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>{% if form.instance.pk %}Edit{% else %}Create{% endif %} Campaign</h2>
+
+    <form method="post">
+        {% csrf_token %}
+
+        <div class="mb-3">
+            <input type="text" name="title" id="id_title" class="form-control" placeholder="Title" value="{{ form.title.value|default_if_none:'' }}">
+            {% if form.title.errors %}
+                <div class="text-danger">{{ form.title.errors }}</div>
+            {% endif %}
+        </div>
+
+        <div class="mb-3">
+            <textarea name="description" id="id_description" class="form-control" placeholder="Description" rows="4">{{ form.description.value|default_if_none:'' }}</textarea>
+            {% if form.description.errors %}
+                <div class="text-danger">{{ form.description.errors }}</div>
+            {% endif %}
+        </div>
+
+        <!-- Budget field with min value set to 0 -->
+        <div class="mb-3">
+            <input type="number" name="budget" id="id_budget" class="form-control" placeholder="Budget" step="0.01" min="0" value="{{ form.budget.value|default_if_none:'' }}">
+            {% if form.budget.errors %}
+                <div class="text-danger">{{ form.budget.errors }}</div>
+            {% endif %}
+        </div>
+
+        <div class="mb-3">
+            <input type="text" name="target_audience" id="id_target_audience" class="form-control" placeholder="Target Audience" value="{{ form.target_audience.value|default_if_none:'' }}">
+            {% if form.target_audience.errors %}
+                <div class="text-danger">{{ form.target_audience.errors }}</div>
+            {% endif %}
+        </div>
+
+        <div class="mb-3">
+            <input type="date" name="start_date" id="id_start_date" class="form-control" value="{{ form.start_date.value|default_if_none:'' }}">
+            {% if form.start_date.errors %}
+                <div class="text-danger">{{ form.start_date.errors }}</div>
+            {% endif %}
+        </div>
+
+        <!-- End Date field -->
+        <div class="mb-3">
+            <input type="date" name="end_date" id="id_end_date" class="form-control" value="{{ form.end_date.value|default_if_none:'' }}">
+            {% if form.end_date.errors %}
+                <div class="text-danger">{{ form.end_date.errors }}</div>
+            {% endif %}
+        </div>
+
+        <div class="mb-3">
+            <select name="status" id="id_status" class="form-select">
+                <option value="" disabled selected>Status</option>
+                <option value="draft" {% if form.status.value == 'draft' %}selected{% endif %}>Draft</option>
+                <option value="active" {% if form.status.value == 'active' %}selected{% endif %}>Active</option>
+                <option value="paused" {% if form.status.value == 'paused' %}selected{% endif %}>Paused</option>
+            </select>
+            {% if form.status.errors %}
+                <div class="text-danger">{{ form.status.errors }}</div>
+            {% endif %}
+        </div>
+
+        <button type="submit" class="btn btn-primary">Save</button>
+        <a href="{% url 'campaigns:campaign_list' %}" class="btn btn-secondary ms-2">Cancel</a>
+    </form>
+
+    {% if form.non_field_errors %}
+        <div class="alert alert-danger mt-3">
+            {{ form.non_field_errors }}
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

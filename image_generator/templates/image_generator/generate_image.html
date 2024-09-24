@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %}Generate Image{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>Generate Campaign Image</h1>
+
+    <form method="post" action="{% url 'image_generator:generate_image' %}" id="image-form">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="prompt">Enter your prompt</label>
+            <input type="text" class="form-control" id="prompt" name="prompt" placeholder="Describe your image..." required>
+        </div>
+
+        <button type="submit" class="btn btn-primary mt-3">Generate Image</button>
+    </form>
+
+    <div id="loading-container" style="display: none; margin-top: 20px;">
+        <div id="loading-message">
+            <p>Generating your image... Please wait.</p>
+            <div class="spinner-border" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+        <div id="loading-emojis"></div>
+    </div>
+
+    {% if image_url %}
+    <div id="image-container" style="margin-top: 20px;">
+        <img src="{{ image_url }}" alt="Generated Image" style="max-width:100%;"/>
+        <br>
+        <a href="{{ image_url }}" download="generated_image.png" class="btn btn-secondary mt-3">Save Image</a>
+    </div>
+    {% endif %}
+</div>
+
+<script src="{% static 'js/image_generator.js' %}"></script>
+{% endblock %}

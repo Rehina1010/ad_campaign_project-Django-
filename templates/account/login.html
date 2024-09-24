@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load socialaccount %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>Login</h2>
+    <form method="post">
+        {% csrf_token %}
+        <div class="dragArea row">
+            <div class="col-md col-sm-12 form-group mb-3" data-for="username">
+                {{ form.username.label_tag }}
+                <input type="text" name="username" placeholder="email" data-form-field="username" class="form-control"
+                       value="" id="username-form02-b">
+            </div>
+            <div class="col-md col-sm-12 form-group mb-3" data-for="password">
+                {{ form.password.label_tag }}
+                <input type="password" name="password" placeholder="password" data-form-field="password"
+                       class="form-control" value="" id="password-form02-b">
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary btn-lg">Login</button>
+    </form>
+    <p class="mt-3">
+        <a class="btn btn-link" href="{% url 'users:password_reset' %}">Forgot your password?</a>
+    </p>
+    <p class="mt-3">
+        <a href="{% provider_login_url 'google' %}">Login with Google</a>
+    </p>
+</div>
+{% endblock %}

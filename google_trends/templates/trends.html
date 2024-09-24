@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block title %}
+Google Trends
+{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>Google Trends</h2>
+    <form method="post">
+        {% csrf_token %}
+        <div class="dragArea row">
+            <div class="col-md col-sm-12 form-group mb-3">
+                {{ form.keyword.label_tag }}
+                <input type="text" name="keyword" placeholder="Enter keyword" class="form-control" id="keyword">
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary btn-lg">Submit</button>
+    </form>
+
+    {% if graph_url %}
+    <h2 class="mt-4">Trends Graph</h2>
+    <img src="data:image/png;base64,{{ graph_url }}" alt="Trends Graph" class="img-fluid">
+    {% endif %}
+
+    {% if top_countries is not None %}
+    <h2 class="mt-4">Top Countries</h2>
+    <div class="row">
+        {% for country, interest in top_countries.items %}
+        <div class="col-4 mb-2">
+            <p>{{ country }}: {{ interest }}</p>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <h2 class="mt-4">Top Countries</h2>
+    <p>No data available.</p>
+    {% endif %}
+</div>
+{% endblock %}

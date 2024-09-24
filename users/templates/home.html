@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}
+Home - Ad Campaign Manager
+{% endblock %}
+
+{% block content %}
+<div class="jumbotron">
+    <h1 class="display-4">Welcome to Ad Campaign Manager</h1>
+    <p class="lead">Manage your advertising campaigns easily and efficiently.</p>
+    <hr class="my-4">
+    {% if user.is_authenticated %}
+    <p>You can start by creating a new campaign or view your existing ones.</p>
+    <a class="btn btn-primary btn-lg" href="{% url 'campaigns:create_campaign' %}" role="button">Create Campaign</a>
+    <a class="btn btn-secondary btn-lg" href="{% url 'campaigns:campaign_list' %}" role="button">View My Campaigns</a>
+    {% else %}
+    <p>Please log in or sign up to start managing your campaigns.</p>
+    <a class="btn btn-primary btn-lg" href="{% url 'users:login' %}" role="button">Login</a>
+    <a class="btn btn-secondary btn-lg" href="{% url 'users:register' %}" role="button">Sign Up</a>
+    {% endif %}
+</div>
+{% endblock %}

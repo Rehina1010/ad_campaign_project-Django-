@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block title %}User Profile{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>{{ profile.user.username }}'s Profile
+        {% if user.avatar_url %}
+        <img src="{{ user.avatar_url }}" alt='{{ user.username }}' class='avatar'/>
+        {% else %}
+        <img src="https://robohash.org/{{ user.email|slice:':50' }}?set=set{{ random_id }}&size=100x100"
+             alt="{{ user.username }}" class='avatar'/>
+        {% endif %}
+
+    </h1>
+
+
+    <p><strong>Email:</strong> {{ profile.user.email }}</p>
+    <p><strong>Bio:</strong> {{ profile.bio }}</p>
+    <p><strong>Location:</strong> {{ profile.location }}</p>
+    <p><strong>Birth Date:</strong> {{ profile.birth_date }}</p>
+
+    <a href="{% url 'users:edit_profile' %}" class="btn btn-primary mt-3">Edit Profile</a>
+    <!-- Кнопка редактирования -->
+
+    <h2>My Campaigns</h2>
+    {% if campaigns %}
+    <ul class="list-group">
+        {% for campaign in campaigns %}
+        <li class="list-group-item">
+            <a href="{% url 'campaigns:campaign_detail' campaign.pk %}">{{ campaign.title }}</a>
+        </li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p>You have no campaigns yet.</p>
+    {% endif %}
+</div>
+{% endblock %}

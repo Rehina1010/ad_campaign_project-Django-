@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container mt-5">
+        <h2>Improved Campaign Details</h2>
+
+        <div class="mb-3">
+            <p><strong>Improved Title:</strong> {{ improved_data.title }}</p>
+            <p><strong>Improved Description:</strong> {{ improved_data.description }}</p>
+            <p><strong>Improved Budget:</strong> ${{ improved_data.budget }}</p>
+        </div>
+
+        <div class="alert alert-info">
+            <h4>Explanation of Improvements:</h4>
+            <div class="explanation-content">
+                <pre>{{ explanation }}</pre>
+            </div>
+        </div>
+
+        <form method="post" action="{% url 'campaigns:save_improvements' campaign.pk %}">
+            {% csrf_token %}
+            <input type="hidden" name="improved_title" value="{{ improved_data.title }}">
+            <input type="hidden" name="improved_description" value="{{ improved_data.description }}">
+            <input type="hidden" name="improved_budget" value="{{ improved_data.budget }}">
+
+            <button type="submit" class="btn btn-success">Save Improved Campaign</button>
+        </form>
+
+        <a href="{% url 'campaigns:campaign_list' %}" class="btn btn-secondary mt-3">Back to Campaign List</a>
+    </div>
+{% endblock %}
