@@ -76,7 +76,6 @@ The main purpose of **Ad Campaign Manager** is to help users create and improve 
 
 ```bash
 git clone https://github.com/Rehina1010/ad_campaign_project-Django-.git
-cd ad_campaign_manager
 ```
 
 ### 2. Set up a virtual environment
