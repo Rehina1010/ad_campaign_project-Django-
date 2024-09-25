@@ -6,6 +6,8 @@ authors = ["Regina0101 <ritodo1010@gmail.com>"]
 readme = "README.md"
 package-mode = false
 
+packages = [{ include = "ad_campaign_manager" }]
+
 [tool.poetry.dependencies]
 python = "^3.12"
 django = "^5.1"
