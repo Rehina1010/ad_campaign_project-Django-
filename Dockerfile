@@ -11,8 +11,8 @@ RUN poetry config virtualenvs.create false \
 
 COPY . .
 
-EXPOSE 8000
+EXPOSE 8080
 
 ENV PYTHONUNBUFFERED=1
 
-CMD ["gunicorn", "--bind", "0.0.0.0:8000", "ad_campaign_manager.wsgi:application"]
+CMD ["gunicorn", "--bind", "0.0.0.0:8080", "ad_campaign_manager.wsgi:application"]
