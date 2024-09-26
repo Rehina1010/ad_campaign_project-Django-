@@ -11,9 +11,9 @@ def init_pipeline():
     print("Model downloading...")
     try:
         pipe = StableDiffusionPipeline.from_pretrained("CompVis/stable-diffusion-v1-4")
-        # device = torch.device(
-        #     "mps" if torch.backends.mps.is_available() else "cuda" if torch.cuda.is_available() else "cpu")
-        device = torch.device("cpu")
+        device = torch.device(
+            "mps" if torch.backends.mps.is_available() else "cuda" if torch.cuda.is_available() else "cpu")
+        # device = torch.device("cpu")
         pipe.to(device)
         print("Model downloaded")
         return pipe
