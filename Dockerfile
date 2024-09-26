@@ -15,4 +15,4 @@ EXPOSE 8080
 
 ENV PYTHONUNBUFFERED=1
 
-CMD ["gunicorn", "--bind", "0.0.0.0:8080", "ad_campaign_manager.wsgi:application"]
+CMD ["gunicorn", "--bind", "0.0.0.0:$PORT", "ad_campaign_manager.wsgi:application"]
