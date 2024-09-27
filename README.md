@@ -68,7 +68,6 @@ The main purpose of **Ad Campaign Manager** is to help users create and improve 
 
 - Python 3.8 or higher
 - Django
-- pip (Python package manager)
 - Virtual environment (optional but recommended)
 - **PostgreSQL** database
 
@@ -81,14 +80,13 @@ git clone https://github.com/Rehina1010/ad_campaign_project-Django-.git
 ### 2. Set up a virtual environment
 
 ```bash
-python3 -m venv env
-source env/bin/activate  # On Windows: env\Scriptsctivate
+python3 poetry install
 ```
 
 ### 3. Install dependencies
 
 ```bash
-pip install -r requirements.txt
+python3 poetry install
 ```
 
 ### 4. Set up environment variables
